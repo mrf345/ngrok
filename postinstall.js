@@ -12,7 +12,10 @@ require('./download')(err => {
       const parsedContent = fs
         .readFileSync(exeFile)
         .toString()
-        .replace(`bin/${pkgName}`, `bin/${pkgName}.exe`);
+        .replace(
+          `"$basedir/node_modules/${pkgName}/bin/${pkgName}"`,
+          `"winpty" "$basedir/node_modules/${pkgName}/bin/${pkgName}.exe"`
+        );
 
       fs.writeFileSync(exeFile, parsedContent);
     }
